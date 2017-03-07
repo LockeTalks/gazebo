@@ -1,0 +1,162 @@
+<strong>General Feats</strong><br>
+<input type="checkbox" class="featCheckbox" value="acrobatic">Acrobatic | 
+<input type="checkbox" class="featCheckbox" value="agile">Agile | 
+<input type="checkbox" class="featCheckbox" value="alertness">Alertness | 
+<input type="checkbox" class="featCheckbox" value="animalAffinity">Animal Affinity | 
+<input type="checkbox" class="featCheckbox" value="armorProficiencyHeavy">Armor Proficiency (Heavy) | 
+<input type="checkbox" class="featCheckbox" value="armorProficiencyLight">Armor Proficiency (Light) | 
+<input type="checkbox" class="featCheckbox" value="armorProficiencyMedium">Armor Proficiency (Medium) | 
+<input type="checkbox" class="featCheckbox" value="athletic">Athletic | 
+<input type="checkbox" class="featCheckbox" value="augmentSummoning">Augment Summoning | 
+<input type="checkbox" class="featCheckbox" value="blindFight">Blind-Fight | 
+<input type="checkbox" class="featCheckbox" value="cleave">Cleave | 
+<input type="checkbox" class="featCheckbox" value="combatCasting">Combat Casting | 
+<input type="checkbox" class="featCheckbox" value="combatExpertise">Combat Expertise | 
+<input type="checkbox" class="featCheckbox" value="combatReflexes">Combat Reflexes | 
+<input type="checkbox" class="featCheckbox" value="deceitful">Deceitful | 
+<input type="checkbox" class="featCheckbox" value="deflectArrows">Deflect Arrows | 
+<input type="checkbox" class="featCheckbox" value="deftHands">Deft Hands | 
+<input type="checkbox" class="featCheckbox" value="diehard">Diehard | 
+<input type="checkbox" class="featCheckbox" value="diligent">Diligent | 
+<input type="checkbox" class="featCheckbox" value="dodge">Dodge | 
+<input type="checkbox" class="featCheckbox" value="endurance">Endurance | 
+<input type="checkbox" class="featCheckbox" value="eschewMaterials">Eschew Materials | 
+<input type="checkbox" class="featCheckbox" value="exoticWeaponProficiency">Exotic Weapon Proficiency | 
+<input type="checkbox" class="featCheckbox" value="extraTurning">Extra Turning | 
+<input type="checkbox" class="featCheckbox" value="farShot">Far Shot | 
+<input type="checkbox" class="featCheckbox" value="greatCleave" disabled>Great Cleave |  <!--Not possible for 1st-lvl characters-->
+<input type="checkbox" class="featCheckbox" value="greaterSpellFocus">Greater Spell Focus | 
+<input type="checkbox" class="featCheckbox" value="greaterSpellPenetration">Greater Spell Penetration | 
+<input type="checkbox" class="featCheckbox" value="greaterTwoWeaponFighting" disabled>Greater Two-Weapon Fighting |  <!--Not possible for 1st-lvl characters-->
+<input type="checkbox" class="featCheckbox" value="greaterWeaponFocus" disabled>Greater Weapon Focus |  <!--Not possible for 1st-lvl characters-->
+<input type="checkbox" class="featCheckbox" value="greaterWeaponSpecialization" disabled>Greater Weapon Specialization |  <!--Not possible for 1st-lvl characters-->
+<input type="checkbox" class="featCheckbox" value="greatFortitude">Great Fortitude | 
+<input type="checkbox" class="featCheckbox" value="improvedBullRush">Improved Bull Rush | 
+<input type="checkbox" class="featCheckbox" value="improvedCounterspell">Improved Counterspell | 
+<input type="checkbox" class="featCheckbox" value="improvedCritical" disabled>Improved Critical |  <!--Not possible for 1st-lvl characters-->
+<input type="checkbox" class="featCheckbox" value="improvedDisarm">Improved Disarm | 
+<input type="checkbox" class="featCheckbox" value="improvedFamiliar">Improved Familiar | 
+<input type="checkbox" class="featCheckbox" value="improvedFeint">Improved Feint | 
+<input type="checkbox" class="featCheckbox" value="improvedGrapple">Improved Grapple | 
+<input type="checkbox" class="featCheckbox" value="improvedInitiative">Improved Initiative | 
+<input type="checkbox" class="featCheckbox" value="improvedOverrun">Improved Overrun | 
+<input type="checkbox" class="featCheckbox" value="improvedPreciseShot">Improved Precise Shot | 
+<input type="checkbox" class="featCheckbox" value="improvedShieldBash">Improved Shield Bash | 
+<input type="checkbox" class="featCheckbox" value="improvedSunder">Improved Sunder | 
+<input type="checkbox" class="featCheckbox" value="improvedTrip">Improved Trip | 
+<input type="checkbox" class="featCheckbox" value="improvedTurning">Improved Turning | 
+<input type="checkbox" class="featCheckbox" value="improvedTwoWeaponFighting" disabled>Improved Two-Weapon Fighting |  <!--Not possible for 1st-lvl characters-->
+<input type="checkbox" class="featCheckbox" value="improvedUnarmedStrike">Improved Unarmed Strike | 
+<input type="checkbox" class="featCheckbox" value="investigator">Investigator | 
+<input type="checkbox" class="featCheckbox" value="ironWill">Iron Will | 
+<input type="checkbox" class="featCheckbox" value="leadership">Leadership | 
+<input type="checkbox" class="featCheckbox" value="lightningReflexes">Lightning Reflexes | 
+<input type="checkbox" class="featCheckbox" value="magicalAptitude">Magical Aptitude | 
+<input type="checkbox" class="featCheckbox" value="manyshot">Manyshot | 
+<input type="checkbox" class="featCheckbox" value="martialWeaponProficiency">Martial Weapon Proficiency | 
+<input type="checkbox" class="featCheckbox" value="mobility">Mobility | 
+<input type="checkbox" class="featCheckbox" value="mountedArchery">Mounted Archery | 
+<input type="checkbox" class="featCheckbox" value="mountedCombat">Mounted Combat | 
+<input type="checkbox" class="featCheckbox" value="naturalSpell">Natural Spell | 
+<input type="checkbox" class="featCheckbox" value="negotiator">Negotiator | 
+<input type="checkbox" class="featCheckbox" value="nimbleFingers">Nimble Fingers | 
+<input type="checkbox" class="featCheckbox" value="persuasive">Persuasive | 
+<input type="checkbox" class="featCheckbox" value="pointBlankShot">Point Blank Shot | 
+<input type="checkbox" class="featCheckbox" value="powerAttack">Power Attack | 
+<input type="checkbox" class="featCheckbox" value="preciseShot">Precise Shot | 
+<input type="checkbox" class="featCheckbox" value="quickDraw">Quick Draw | 
+<input type="checkbox" class="featCheckbox" value="rapidReload">Rapid Reload | 
+<input type="checkbox" class="featCheckbox" value="rapidShot">Rapid Shot | 
+<input type="checkbox" class="featCheckbox" value="rideByAttack">Ride-By Attack | 
+<input type="checkbox" class="featCheckbox" value="run">Run | 
+<input type="checkbox" class="featCheckbox" value="selfSufficient">Self-Sufficient | 
+<input type="checkbox" class="featCheckbox" value="shieldProficiency">Shield Proficiency | 
+<input type="checkbox" class="featCheckbox" value="shotOnTheRun">Shot On The Run | 
+<input type="checkbox" class="featCheckbox" value="simpleWeaponProficiency">Simple Weapon Proficiency | 
+<input type="checkbox" class="featCheckbox" value="skillFocus">Skill Focus | 
+<input type="checkbox" class="featCheckbox" value="snatchArrows">Snatch Arrows | 
+<input type="checkbox" class="featCheckbox" value="spellFocus">Spell Focus | 
+<input type="checkbox" class="featCheckbox" value="spellMastery">Spell Mastery | 
+<input type="checkbox" class="featCheckbox" value="spellPenetration">Spell Penetration | 
+<input type="checkbox" class="featCheckbox" value="spiritedCharge">Spirited Charge | 
+<input type="checkbox" class="featCheckbox" value="springAttack">Spring Attack | 
+<input type="checkbox" class="featCheckbox" value="stealthy">Stealthy | 
+<input type="checkbox" class="featCheckbox" value="stunningFist">Stunning Fist | 
+<input type="checkbox" class="featCheckbox" value="toughness">Toughness | 
+<input type="checkbox" class="featCheckbox" value="towerShieldProficiency">Tower Shield Proficiency | 
+<input type="checkbox" class="featCheckbox" value="track">Track | 
+<input type="checkbox" class="featCheckbox" value="trample">Trample | 
+<input type="checkbox" class="featCheckbox" value="twoWeaponDefense">Two-Weapon Defense | 
+<input type="checkbox" class="featCheckbox" value="twoWeaponFighting">Two-Weapon Fighting | 
+<input type="checkbox" class="featCheckbox" value="weaponFinesse">Weapon Finesse | 
+<input type="checkbox" class="featCheckbox" value="weaponFocus">Weapon Focus | 
+<input type="checkbox" class="featCheckbox" value="weaponSpecialization">Weapon Specialization | 
+<input type="checkbox" class="featCheckbox" value="whirlwindAttack">Whirlwind Attack <br>
+<strong>Item Creation Feats</strong><br>
+<input type="checkbox" class="featCheckbox" value="brewPotion">Brew Potion | 
+<input type="checkbox" class="featCheckbox" value="craftMagicArmsAndArmor">Craft Magic Arms And Armor | 
+<input type="checkbox" class="featCheckbox" value="craftRod">Craft Rod | 
+<input type="checkbox" class="featCheckbox" value="craftStaff">Craft Staff | 
+<input type="checkbox" class="featCheckbox" value="craftWand">Craft Wand | 
+<input type="checkbox" class="featCheckbox" value="craftWondrousItem">Craft Wondrous Item | 
+<input type="checkbox" class="featCheckbox" value="forgeRing">Forge Ring | 
+<input type="checkbox" class="featCheckbox" value="scribeScroll">Scribe Scroll <br>
+<strong>Metamagic Feats</strong><br>
+<input type="checkbox" class="featCheckbox" value="empowerSpell">Empower Spell | 
+<input type="checkbox" class="featCheckbox" value="enlargeSpell">Enlarge Spell | 
+<input type="checkbox" class="featCheckbox" value="extendSpell">Extend Spell | 
+<input type="checkbox" class="featCheckbox" value="heightenSpell">Heighten Spell | 
+<input type="checkbox" class="featCheckbox" value="maximizeSpell">Maximize Spell | 
+<input type="checkbox" class="featCheckbox" value="quickenSpell">Quicken Spell | 
+<input type="checkbox" class="featCheckbox" value="silentSpell">Silent Spell | 
+<input type="checkbox" class="featCheckbox" value="stillSpell">Still Spell | 
+<input type="checkbox" class="featCheckbox" value="widenSpell">Widen Spell <br>
+<strong>Fighter Bonus Feats</strong><br>
+<input type="checkbox" class="featCheckbox" value="blindFight">Blind-Fight | 
+<input type="checkbox" class="featCheckbox" value="cleave">Cleave | 
+<input type="checkbox" class="featCheckbox" value="combatExpertise">Combat Expertise | 
+<input type="checkbox" class="featCheckbox" value="combatReflexes">Combat Reflexes | 
+<input type="checkbox" class="featCheckbox" value="deflectArrows">Deflect Arrows | 
+<input type="checkbox" class="featCheckbox" value="dodge">Dodge | 
+<input type="checkbox" class="featCheckbox" value="exoticWeaponProficiency">Exotic Weapon Proficiency | 
+<input type="checkbox" class="featCheckbox" value="farShot">Far Shot | 
+<input type="checkbox" class="featCheckbox" value="greatCleave">Great Cleave | 
+<input type="checkbox" class="featCheckbox" value="greaterTwoWeaponFighting">Greater Two-Weapon Fighting | 
+<input type="checkbox" class="featCheckbox" value="greaterWeaponFocus">Greater Weapon Focus | 
+<input type="checkbox" class="featCheckbox" value="greaterWeaponSpecialization">Greater Weapon Specialization | 
+<input type="checkbox" class="featCheckbox" value="improvedBullRush">Improved Bull Rush | 
+<input type="checkbox" class="featCheckbox" value="improvedCritical">Improved Critical | 
+<input type="checkbox" class="featCheckbox" value="improvedDisarm">Improved Disarm | 
+<input type="checkbox" class="featCheckbox" value="improvedFeint">Improved Feint | 
+<input type="checkbox" class="featCheckbox" value="improvedGrapple">Improved Grapple | 
+<input type="checkbox" class="featCheckbox" value="improvedInitiative">Improved Initiative | 
+<input type="checkbox" class="featCheckbox" value="improvedOverrun">Improved Overrun | 
+<input type="checkbox" class="featCheckbox" value="improvedPreciseShot">Improved Precise Shot | 
+<input type="checkbox" class="featCheckbox" value="improvedShieldBash">Improved Shield Bash | 
+<input type="checkbox" class="featCheckbox" value="improvedSunder">Improved Sunder | 
+<input type="checkbox" class="featCheckbox" value="improvedTrip">Improved Trip | 
+<input type="checkbox" class="featCheckbox" value="improvedTwoWeaponFighting">Improved Two-Weapon Fighting | 
+<input type="checkbox" class="featCheckbox" value="improvedUnarmedStrike">Improved Unarmed Strike | 
+<input type="checkbox" class="featCheckbox" value="manyshot">Manyshot | 
+<input type="checkbox" class="featCheckbox" value="mobility">Mobility | 
+<input type="checkbox" class="featCheckbox" value="mountedArchery">Mounted Archery | 
+<input type="checkbox" class="featCheckbox" value="mountedCombat">Mounted Combat | 
+<input type="checkbox" class="featCheckbox" value="pointBlankShot">Point Blank Shot | 
+<input type="checkbox" class="featCheckbox" value="powerAttack">Power Attack | 
+<input type="checkbox" class="featCheckbox" value="preciseShot">Precise Shot | 
+<input type="checkbox" class="featCheckbox" value="quickDraw">Quick Draw | 
+<input type="checkbox" class="featCheckbox" value="rapidReload">Rapid Reload | 
+<input type="checkbox" class="featCheckbox" value="rapidShot">Rapid Shot | 
+<input type="checkbox" class="featCheckbox" value="rideByAttack">Ride-By Attack | 
+<input type="checkbox" class="featCheckbox" value="shotOnTheRun">Shot On The Run | 
+<input type="checkbox" class="featCheckbox" value="snatchArrows">Snatch Arrows | 
+<input type="checkbox" class="featCheckbox" value="spiritedCharge">Spirited Charge | 
+<input type="checkbox" class="featCheckbox" value="springAttack">Spring Attack | 
+<input type="checkbox" class="featCheckbox" value="stunningFist">Stunning Fist | 
+<input type="checkbox" class="featCheckbox" value="trample">Trample | 
+<input type="checkbox" class="featCheckbox" value="twoWeaponDefense">Two-Weapon Defense | 
+<input type="checkbox" class="featCheckbox" value="twoWeaponFighting">Two-Weapon Fighting | 
+<input type="checkbox" class="featCheckbox" value="weaponFinesse">Weapon Finesse | 
+<input type="checkbox" class="featCheckbox" value="weaponFocus">Weapon Focus | 
+<input type="checkbox" class="featCheckbox" value="weaponSpecialization">Weapon Specialization | 
+<input type="checkbox" class="featCheckbox" value="whirlwindAttack">Whirlwind Attack  

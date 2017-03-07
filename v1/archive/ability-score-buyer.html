@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ability Score Buyer</title>
+		<script language="javascript" type="text/javascript" src="functions.js"></script>
+  </head>
+  <body>
+		<form id="abilitiesForm">
+		<fieldset id="abilitiesFieldSet">
+		<legend>Abilities</legend>
+		Point Bank: <input type="number" id="pointBank" value="25" readOnly="true"><br><br>
+		STR: <input type="number" id="str" value="8" readOnly="true"> |  
+		STR Modifier: <input type="number" id="strMod" value="-1" readOnly="true"> | 
+			<input type="button" onClick="buyStr();setMods()" value="+STR"> | 
+			<input type="button" onClick="sellStr();setMods()" value="-STR">
+			<br>
+
+		DEX: <input type="number" id="dex" value="8" readOnly="true"> | 
+		DEX Modifier: <input type="number" id="dexMod" value="-1" readOnly="true"> | 
+			<input type="button" onClick="buyDex();setMods()" value="+DEX"> | 
+			<input type="button" onClick="sellDex();setMods()" value="-DEX">
+			<br>
+
+		CON: <input type="number" id="con" value="8" readOnly="true"> | 
+		CON Modifier: <input type="number" id="conMod" value="-1" readOnly="true"> | 
+			<input type="button" onClick="buyCon();setMods()" value="+CON"> | 
+			<input type="button" onClick="sellCon();setMods()" value="-CON">
+			<br>
+
+		INT: <input type="number" id="int" value="8" readOnly="true"> | 
+		INT Modifier: <input type="number" id="intMod" value="-1" readOnly="true"> | 
+			<input type="button" onClick="buyInt();setMods()" value="+INT"> | 
+			<input type="button" onClick="sellInt();setMods()" value="-INT">
+			<br>
+
+		WIS: <input type="number" id="wis" value="8" readOnly="true"> | 
+		WIS Modifier: <input type="number" id="wisMod" value="-1" readOnly="true"> | 
+			<input type="button" onClick="buyWis();setMods()" value="+WIS"> | 
+			<input type="button" onClick="sellWis();setMods()" value="-WIS">
+			<br>
+		CHA: <input type="number" id="cha" value="8" readOnly="true"> | 
+		CHA Modifier: <input type="number" id="chaMod" value="-1" readOnly="true"> | 
+			<input type="button" onClick="buyCha();setMods()" value="+CHA"> | 
+			<input type="button" onClick="sellCha();setMods()" value="-CHA">
+			<br>
+			<input type="button" onclick="reset()" value="RESET">
+		</fieldset>
+		</form>
+  </body>
+</html>

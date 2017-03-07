@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Gazebo</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+	  <script language="javascript" type="text/javascript" src="gazebo-functions.js"></script>
+  </head>
+  <body>
+    <form name="abilities">
+      Point Bank: <input type="number" id="pointBank" value="25" readOnly="true"><br>
+      <fieldset>
+        <legend>
+          Abilities
+        </legend>
+			Base STR: <input type="number" id="str" value="8" readOnly="true"> | 
+				Race Adj.: <input type="number" id="strRaceMod" value="0" readOnly="true"> | 
+				Full STR: <input type="number" id="strFull" readOnly="true"> | 
+				STR Mod: <input type="number" id="strMod" readOnly="true"> |
+				<input type="button" onClick="buyStr();setRaceAdj();setFullAbs();setAbMods()" value="+STR"> |
+				<input type="button" onClick="sellStr();setRaceAdj();setFullAbs();setAbMods()" value="-STR">
+			<br>Base DEX: <input type="number" id="dex" value="8" readOnly="true"> | 
+				Race Adj.: <input type="number" id="dexRaceMod" value="0" readOnly="true"> | 
+				Full DEX: <input type="number" id="dexFull" readOnly="true"> | 
+				DEX Mod: <input type="number" id="dexMod" readOnly="true"> |
+				<input type="button" onClick="buyDex();setRaceAdj();setFullAbs();setAbMods()" value="+DEX"> |
+				<input type="button" onClick="sellDex();setRaceAdj();setFullAbs();setAbMods()" value="-DEX">
+			<br>Base CON: <input type="number" id="con" value="8" readOnly="true"> | 
+				Race Adj.: <input type="number" id="conRaceMod" value="0" readOnly="true"> | 
+				Full CON: <input type="number" id="conFull" readOnly="true"> | 
+				CON Mod: <input type="number" id="conMod" readOnly="true"> |
+				<input type="button" onClick="buyCon();setRaceAdj();setFullAbs();setAbMods()" value="+CON"> |
+				<input type="button" onClick="sellCon();setRaceAdj();setFullAbs();setAbMods()" value="-CON">
+			<br>Base INT: <input type="number" id="int" value="8" readOnly="true"> | 
+				Race Adj.: <input type="number" id="intRaceMod" value="0" readOnly="true"> | 
+				Full INT: <input type="number" id="intFull" readOnly="true"> | 
+				INT Mod: <input type="number" id="intMod" readOnly="true"> |
+				<input type="button" onClick="buyInt();setRaceAdj();setFullAbs();setAbMods()" value="+INT"> |
+				<input type="button" onClick="sellInt();setRaceAdj();setFullAbs();setAbMods()" value="-INT">
+			<br>Base WIS: <input type="number" id="wis" value="8" readOnly="true"> | 
+				Race Adj.: <input type="number" id="wisRaceMod" value="0" readOnly="true"> | 
+				Full WIS: <input type="number" id="wisFull" readOnly="true"> | 
+				WIS Mod: <input type="number" id="wisMod" readOnly="true"> |
+				<input type="button" onClick="buyWis();setRaceAdj();setFullAbs();setAbMods()" value="+WIS"> |
+				<input type="button" onClick="sellWis();setRaceAdj();setFullAbs();setAbMods()" value="-WIS">
+			<br>Base CHA: <input type="number" id="cha" value="8" readOnly="true"> | 
+				Race Adj.: <input type="number" id="chaRaceMod" value="0" readOnly="true"> | 
+				Full CHA: <input type="number" id="chaFull" readOnly="true"> | 
+				CHA Mod: <input type="number" id="chaMod" readOnly="true"> |
+				<input type="button" onClick="buyCha();setRaceAdj();setFullAbs();setAbMods()" value="+CHA"> |
+				<input type="button" onClick="sellCha();setRaceAdj();setFullAbs();setAbMods()" value="-CHA">
+		  </fieldset>
+    </form>
+    <form name="raceForm">
+      <fieldset>
+        <legend>
+          Race
+        </legend>
+        <select id="raceSelect" onchange="setRaceAdj();setFullAbs();setAbMods()">
+          <option value="noneSelected">--------</option>
+          <option value="human">Human</option>
+          <option value="dwarf">Dwarf</option>
+          <option value="elf">Elf</option>
+          <option value="gnome">Gnome</option>
+          <option value="halfElf">Half-Elf</option>
+          <option value="halfOrc">Half-Orc</option>
+          <option value="halfling">Halfling</option>
+				</select>
+      </fieldset>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+input[type="number"] {
+	width:35px;
+}
+
+input[type="button"]  {
+	width:60px
+}
+
+#startAbs {
+	float:left;
+	width:300px;
+	height:250px;
+}
+
+#finishAbs {
+	float:left;
+	width:400px;
+	height:250px;
+}
+
+td {
+	padding:2px;
+	text-align:right;
+}
+
+#raceFieldset {
+	width:732px;
+}

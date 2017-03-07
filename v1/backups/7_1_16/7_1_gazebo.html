@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Gazebo</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+	  <script language="javascript" type="text/javascript" src="gazebo-functions.js"></script>
+  </head>
+  <body>
+    <form name="abilities">
+      <fieldset id="startAbs">
+				<legend>
+          Set Your Base Ability Scores
+        </legend>
+				<table border="1">
+					<tr>
+					<td>Base STR: <input type="number" id="str" value="8" readOnly="true"></td>
+					<td><input type="button" onClick="buyStr();setRaceAdj();setFullAbs();setAbMods()" value="+STR"></td>
+					<td><input type="button" onClick="sellStr();setRaceAdj();setFullAbs();setAbMods()" value="-STR"></td>
+					</tr>
+					<tr>
+					<td>Base DEX: <input type="number" id="dex" value="8" readOnly="true"></td>
+					<td><input type="button" onClick="buyDex();setRaceAdj();setFullAbs();setAbMods()" value="+DEX"></td>
+					<td><input type="button" onClick="sellDex();setRaceAdj();setFullAbs();setAbMods()" value="-DEX"></td>
+					</tr>
+					<tr>
+					<td>Base CON: <input type="number" id="con" value="8" readOnly="true"></td>
+					<td><input type="button" onClick="buyCon();setRaceAdj();setFullAbs();setAbMods()" value="+CON"></td>
+					<td><input type="button" onClick="sellCon();setRaceAdj();setFullAbs();setAbMods()" value="-CON"></td>
+					</tr>
+					<tr>
+					<td>Base INT: <input type="number" id="int" value="8" readOnly="true"></td>
+					<td><input type="button" onClick="buyInt();setRaceAdj();setFullAbs();setAbMods()" value="+INT"></td>
+					<td><input type="button" onClick="sellInt();setRaceAdj();setFullAbs();setAbMods()" value="-INT"></td>
+					</tr>
+					<tr>
+					<td>Base WIS: <input type="number" id="wis" value="8" readOnly="true"></td>
+					<td><input type="button" onClick="buyWis();setRaceAdj();setFullAbs();setAbMods()" value="+WIS"></td>
+					<td><input type="button" onClick="sellWis();setRaceAdj();setFullAbs();setAbMods()" value="-WIS"></td>
+					</tr>
+					<tr>
+					<td>Base CHA: <input type="number" id="cha" value="8" readOnly="true"></td>
+					<td><input type="button" onClick="buyCha();setRaceAdj();setFullAbs();setAbMods()" value="+CHA"></td>
+					<td><input type="button" onClick="sellCha();setRaceAdj();setFullAbs();setAbMods()" value="-CHA"></td>
+					</tr>
+				</table>
+				<p>
+					Point Bank: <input type="number" id="pointBank" value="25" readOnly="true">
+				</p>
+		  </fieldset>
+			<fieldset id="finishAbs">
+				<legend>
+					Adjustments, Full Ability Scores, and Ability Modifiers
+				</legend>
+				<table border="1">
+					<tr>
+					<td>Race Adj.: <input type="number" id="strRaceMod" value="0" readOnly="true"></td>
+					<td>Full STR: <input type="number" id="strFull" readOnly="true"></td>
+					<td>STR Mod: <input type="number" id="strMod" readOnly="true"></td>
+					</tr>
+					<tr>
+					<td>Race Adj.: <input type="number" id="dexRaceMod" value="0" readOnly="true"></td>
+					<td>Full DEX: <input type="number" id="dexFull" readOnly="true"></td>
+					<td>DEX Mod: <input type="number" id="dexMod" readOnly="true"></td>
+					</tr>
+					<tr>
+					<td>Race Adj.: <input type="number" id="conRaceMod" value="0" readOnly="true"></td>
+					<td>Full CON: <input type="number" id="conFull" readOnly="true"></td>
+					<td>CON Mod: <input type="number" id="conMod" readOnly="true"></td>
+					</tr>
+					<tr>
+					<td>Race Adj.: <input type="number" id="intRaceMod" value="0" readOnly="true"></td>
+					<td>Full INT: <input type="number" id="intFull" readOnly="true"></td>
+					<td>INT Mod: <input type="number" id="intMod" readOnly="true"></td>
+					</tr>
+					<tr>
+					<td>Race Adj.: <input type="number" id="wisRaceMod" value="0" readOnly="true"></td>
+					<td>Full WIS: <input type="number" id="wisFull" readOnly="true"></td>
+					<td>WIS Mod: <input type="number" id="wisMod" readOnly="true"></td>
+					</tr>
+					<tr>
+					<td>Race Adj.: <input type="number" id="chaRaceMod" value="0" readOnly="true"></td>
+					<td>Full CHA: <input type="number" id="chaFull" readOnly="true"></td>
+					<td>CHA Mod: <input type="number" id="chaMod" readOnly="true"></td>
+				</table>
+			</fieldset>	
+		</form>
+    <form name="raceForm">
+      <fieldset id="raceFieldset">
+        <legend>
+          Race
+        </legend>
+        <select id="raceSelect" onchange="setRaceAdj();setFullAbs();setAbMods()">
+          <option value="noneSelected">--------</option>
+          <option value="human">Human</option>
+          <option value="dwarf">Dwarf</option>
+          <option value="elf">Elf</option>
+          <option value="gnome">Gnome</option>
+          <option value="halfElf">Half-Elf</option>
+          <option value="halfOrc">Half-Orc</option>
+          <option value="halfling">Halfling</option>
+				</select>
+      </fieldset>
+    </form>
+  </body>
+</html>

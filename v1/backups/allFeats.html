@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>All Feats</title>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	  <script language="javascript" type="text/javascript" src="gazebo-functions.js"></script>
+  </head>
+  <body>
+		<form id="featsForm">
+    <fieldset id="featsFieldset">
+			<legend>
+				Feats
+			</legend>
+				<strong>General</strong><br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="acrobatic">Acrobatic<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="agile">Agile<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="alertness">Alertness<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="animalAffinity">Animal Affinity<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="armorProficiencyLight">Armor Proficiency (Light)<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="armorProficiencyMedium">-Armor Proficiency (Medium)<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="armorProficiencyHeavy">--Armor Proficiency (Heavy)<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="athletic">Athletic<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="augmentSummoning">Augment Summoning<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="blindFight">Blind-Fight<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="combatCasting">Combat Casting<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="combatExpertise">Combat Expertise<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedDisarm">Improved Disarm<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedFeint">Improved Feint<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedTrip">Improved Trip<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="whirlwindAttack">Whirlwind Attack<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="combatReflexes">Combat Reflexes<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="deceitful">Deceitful<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="deftHands">Deft Hands<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="diligent">Diligent<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="dodge">Dodge<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="mobility">-Mobility<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="springAttack">--Spring Attack<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="endurance">Endurance<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="diehard">-Diehard<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="eschewMaterials">Eschew Materials<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="exoticWeaponProficiency">Exotic Weapon Proficiency<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="extraTurning">Extra Turning<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="greatFortitude">Great Fortitude<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedCounterspell">Improved Counterspell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedCritical">Improved Critical<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedFamiliar">Improved Familiar<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedInitiative">Improved Initiative<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedTurning">Improved Turning<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedUnarmedStrike">Improved Unarmed Strike<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="deflectArrows">-Deflect Arrows<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedGrapple">-Improved Grapple<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="snatchArrows">-Snatch Arrows<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="stunningFist">-Stunning Fist<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="investigator">Investigator<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="ironWill">Iron Will<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="leadership">Leadership<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="lightningReflexes">Lightning Reflexes<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="magicalAptitude">Magical Aptitude<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="martialWeaponProficiency">Martial Weapon Proficiency<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="mountedCombat">Mounted Combat<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="mountedArchery">-Mounted Archery<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="rideByAttack">-Ride-By Attack<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="spiritedCharge">--Spirited Charge<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="trample">-Trample<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="naturalSpell">Natural Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="negotiator">Negotiator<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="nuimbleFingers">Nimble Fingers<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="persuasive">Persuasive<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="pointBlankShot">Point Blank Shot<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="farShot">-Far Shot<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="preciseShot">-Precise Shot<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedPreciseShot">--Improved Precise Shot<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="rapidShot">-Rapid Shot<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="manyshot">--Manyshot<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="shotOnTheRun">-Shot On The Run<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="pwoerAttack">Power Attack<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="cleave">-Cleave<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="greatCleave">--Great Cleave<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedBullRush">-Improved Bull Rush<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedOverrun">-Improved Overrun<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedSunder">-Improved Sunder<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="quickDraw">Quick Draw<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="rapidReload">Rapid Reload<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="run">Run<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="selfSufficient">Self-Sufficient<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="shieldProficiency">Shield Proficiency<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedShieldBash">-Improved Shield Bash<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="towerShieldProficiency">-Tower Shield Proficiency<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="simpleWeaponProficiency">Simple Weapon Proficiency<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="skillFocus">Skill Focus<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="spellFocus">Spell Focus<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="greaterSpellFocus">-Greater Spell Focus<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="spellMastery">Spell Mastery<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="spellPenetration">Spell Penetration<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="greaterSpellPenetration">Greater Spell Penetration<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="stealthy">Stealthy<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="toughness">Toughness<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="track">Track<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="twoWeaponFighting">Two-Weapon Fighting<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="twoWeaponDefense">-Two-Weapon Defense<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="improvedTwoWeaponFighting">-Improved Two-Weapon Fighting<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="greaterTwoWeaponFighting">-Greater Two-Weapon Fighting<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="weaponFinesse">Weapon Finesse<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="weaponFocus">Weapon Focus<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="weaponSpecialization">-Weapon Specialization<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="greaterWeaponFocus">-Greater Weapon Focus<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="greaterWeaponSpecialization">-Greater Weapon Specialization<br>
+				<strong>Item Creation</strong><br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="brewPotion">Brew Potion<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="craftMagicArmsAndArmor">Craft Magic Arms And Armor<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="craftRod">Craft Rod<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="craftStaff">Craft Staff<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="craftWand">Craft Wand<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="craftWondrousItem">Craft Wondrous Item<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="forgeRing">Forge Ring<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="scribeScroll">Scribe Scroll<br>
+				<strong>Metamagic</strong><br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="empowerSpell">Empower Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="enlargeSpell">Enlarge Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="extendSpell">Extend Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="heightenSpell">Heighten Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="maximizeSpell">Maximize Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="quickenSpell">Quicken Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="silentSpell">Silent Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="stillSpell">Still Spell<br>
+				<input type="checkbox" class="feat" onchange="getFeatsChecked()" value="widenSpell">Widen Spell<br>
+		</fieldset>
+		</form>
+  </body>
+</html>

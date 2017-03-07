@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>d20 Character Sheet</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script language="javascript" type="text/javascript" src="functions.js"></script>
+</head>
+
+<body>
+	<form id="characterSheet">
+		<fieldset id="metaGameInfo">
+			<legend>Meta-Game Information</legend>
+			Player: <input type="text" id="player"><br> Campaign: <input type="text" id="campaign"><br> XP: <input type="number" disabled id="xp"><br>
+		</fieldset>
+		<fieldset id="character">
+			<legend>Character</legend>
+			Alignment:
+			<select id="alignment">
+						<option value="lg">Lawful Good</option>
+						<option value="ln">Lawful Neutral</option>
+						<option value="le">Lawful Evil</option>
+						<option value="ng">Neutral Good</option>
+						<option value="nn">Neutral</option>
+						<option value="ne">Neutral Evil</option>
+						<option value="cg">Chaotic Good</option>
+						<option value="cn">Chaotic Neutral</option>
+						<option value="ce">Chaotic Evil</option>
+					</select><br> Name: <input type="text" id="name"><br> Gender: <input type="text" id="gender"><br>
+			<!--Using a text field instead of select because gender is fluid and has no impact on character stats.-->
+			Race:
+			<select id="race" onchange="setSize();setRaceMods();setClassMods();setAbMods;setFullMod()">
+						<option value="noneSelected">--------</option>
+						<option value="human">Human</option>
+						<option value="dwarf">Dwarf</option>
+						<option value="elf">Elf</option>
+						<option value="gnome">Gnome</option>
+						<option value="halfElf">Half-Elf</option>
+						<option value="halfOrc">Half-Orc</option>
+						<option value="halfling">Halfling</option>
+					</select> 
+						<input type="number" name="humanSkillBonus" id="humanSkillBonus" readOnly="true"> <br> 
+			Size:
+			<select id="size" disabled>
+						<!--For this first version of the d20 Character Builder, we're just using "small" and "medium," but I've left other size categories commented out so they can be easily added in later, when we have more races.-->
+						<!--<option value="fine">Fine</option>
+						<option value="diminutive">Diminutive</option>
+						<option value="tiny">Tiny</option>-->
+						<option value="small">Small</option>
+						<option value="medium">Medium</option>
+						<!--<option value="large">Large</option>
+						<option value="huge">Huge</option>
+						<option value="gargantuan">Gargantuan</option>
+						<option value="colossal">Colossal</option>-->
+					</select> <br> Size Modifier: <input type="number" disabled id="sizeMod"><br>
+		</fieldset>
+		<fieldset id="abilities">
+			<legend>Abilities</legend>
+			Point Bank: <input type="number" disabled id="pointBank" value="25" readOnly="true"><br>
+			<br> STR: <input type="number" disabled id="str" value="8" readOnly="true"> | 
+				Race Mod: <input type="number" disabled id="strRaceMod" value="0" readOnly="true"> | 
+				STR Mod: <input type="number" disabled id="strMod" value="-1" readOnly="true"> |
+				<input type="button" onClick="buyStr();setAbMods();setClassMods();setFullMod()" value="+STR"> |
+				<input type="button" onClick="sellStr();setAbMods();setClassMods();setFullMod()" value="-STR">
+			<br> DEX: <input type="number" disabled id="dex" value="8" readOnly="true"> | 
+				Race Mod: <input type="number" disabled id="dexRaceMod" value="0" readOnly="true"> | 
+				DEX Mod: <input type="number" disabled id="dexMod" value="-1" readOnly="true"> |
+				<input type="button" onClick="buyDex();setAbMods();setClassMods();setFullMod()" value="+DEX"> |
+				<input type="button" onClick="sellDex();setAbMods();setClassMods();setFullMod()" value="-DEX">
+			<br> CON: <input type="number" disabled id="con" value="8" readOnly="true"> | 
+				Race Mod: <input type="number" disabled id="conRaceMod" value="0" readOnly="true"> | 
+				CON Mod: <input type="number" disabled id="conMod" value="-1" readOnly="true"> |
+				<input type="button" onClick="buyCon();setAbMods();setClassMods();setFullMod()" value="+CON"> |
+				<input type="button" onClick="sellCon();setAbMods();setClassMods();setFullMod()" value="-CON">
+			<br> INT: <input type="number" disabled id="int" value="8" readOnly="true"> | 
+				Race Mod: <input type="number" disabled id="intRaceMod" value="0" readOnly="true"> | 
+				INT Mod: <input type="number" disabled id="intMod" value="-1" readOnly="true"> |
+				<input type="button" onClick="buyInt();setAbMods();setClassMods();setFullMod()" value="+INT"> |
+				<input type="button" onClick="sellInt();setAbMods();setClassMods();setFullMod()" value="-INT">
+			<br> WIS: <input type="number" disabled id="wis" value="8" readOnly="true"> | 
+				Race Mod: <input type="number" disabled id="wisRaceMod" value="0" readOnly="true"> | 
+				WIS Mod: <input type="number" disabled id="wisMod" value="-1" readOnly="true"> |
+				<input type="button" onClick="buyWis();setAbMods();setClassMods();setFullMod()" value="+WIS"> |
+				<input type="button" onClick="sellWis();setAbMods();setClassMods();setFullMod()" value="-WIS">
+			<br> CHA: <input type="number" disabled id="cha" value="8" readOnly="true"> | 
+				Race Mod: <input type="number" disabled id="chaRaceMod" value="0" readOnly="true"> | 
+				CHA Modifier: <input type="number" disabled id="chaMod" value="-1" readOnly="true"> |
+				<input type="button" onClick="buyCha();setAbMods();setClassMods();setFullMod()" value="+CHA"> |
+				<input type="button" onClick="sellCha();setAbMods();setClassMods();setFullMod()" value="-CHA">
+			<br>
+			<input type="button" onclick="reset()" value="RESET">
+		</fieldset>
+		<fieldset id="classes">
+			<legend>Classes</legend>
+			Class 1: <select id="class1" onchange="setClassMods();setFullMod()">
+				<option value="noneSelected">--------</option>
+				<option value="barbarian">Barbarian</option>
+				<option value="bard">Bard</option>
+				<option value="cleric">Cleric</option>
+				<option value="druid">Druid</option>
+				<option value="fighter">Fighter</option>
+				<option value="monk">Monk</option>
+				<option value="paladin">Paladin</option>
+				<option value="ranger">Ranger</option>
+				<option value="rogue">Rogue</option>
+				<option value="sorcerer">Sorcerer</option>
+				<option value="wizard">Wizard</option>
+			</select><br>
+		</fieldset>
+		<fieldset id="saves">
+			<legend>Saves</legend>
+			<strong>Fortitude Save: </strong><input type="number" disabled id="forMod"><br> CON Modifier: <input type="number" disabled id="forConMod"><br> Base Save: <input type="number" disabled id="forBaseMod"><br> Racial Modifier: <input type="number" disabled id="forRaceMod"><br> Misc. Modifier:
+			<input type="number" disabled id="forMiscMod"><br>
+			<br>
+			<strong>Reflex Save: </strong><input type="number" disabled id="refMod"><br> DEX Modifier: <input type="number" disabled id="refDexMod"><br> Base Save: <input type="number" disabled id="refBaseMod"><br> Racial Modifier: <input type="number" disabled id="refRaceMod"><br> Misc. Modifier:
+			<input type="number" disabled id="refMiscMod"><br>
+			<br>
+			<strong>Will Save: </strong><input type="number" disabled id="wilMod"><br> WIS Modifier: <input type="number" disabled id="wilWisMod"><br> Base Save: <input type="number" disabled id="wilBaseMod"><br> Racial Modifier: <input type="number" disabled id="wilRaceMod"><br> Misc. Modifier:
+			<input type="number" disabled id="wilMiscMod"><br>
+		</fieldset>
+		<fieldset id="skills">
+			<legend>Skills</legend>
+			Points to Spend on Skills: <input type="number" diabled id="skillPointBank"><br>
+			Max Ranks for Class Skills: <input type="number" disabled id="maxRanksClass" value="4"><br> 
+			Max Ranks for Cross-Class Skills: <input type="number" disabled id="maxRanksCrossClass" value="2"><br>
+			<table>
+				<tr>
+					<th>Skill Name</th>
+					<th>Can Be Used Untrained</th>
+					<th>Skill Bonus</th>
+					<th>Key Ability</th>
+					<th>Key Ability Modifier</th>
+					<th>Class Skill</th>
+					<th>Ranks</th>
+					<th>Racial Feats, Synergy</th>
+					<th>Misc</th>
+					<th>Favored Enemy Bonus</th>
+					<th>Armor Check Penalty</th>
+				</tr>
+				<tr>
+					<td>Appraise</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="appraiseSkillBonus"></td>
+					<td>INT</td>
+					<td><input type="number" disabled id="appraiseAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="appraiseClass1Skill">
+					</td>
+					<td><input type="number" disabled id="appraiseRanks"></td>
+					<td><input type="number" disabled id="appraiseRaceSyn"></td>
+					<td><input type="number" disabled id="appraiseMisc"></td>
+					<td><input type="number" disabled id="appraiseFavored"></td>
+					<td><input type="number" disabled id="appraiseArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Balance</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="balanceSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="balanceAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="balanceClass1Skill">
+					</td>
+					<td><input type="number" disabled id="balanceRanks"></td>
+					<td><input type="number" disabled id="balanceRaceSyn"></td>
+					<td><input type="number" disabled id="balanceMisc"></td>
+					<td><input type="number" disabled id="balanceFavored"></td>
+					<td><input type="number" disabled id="balanceArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Bluff</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="bluffSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" disabled id="bluffAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="bluffClass1Skill">
+					</td>
+					<td><input type="number" disabled id="bluffRanks"></td>
+					<td><input type="number" disabled id="bluffRaceSyn"></td>
+					<td><input type="number" disabled id="bluffMisc"></td>
+					<td><input type="number" disabled id="bluffFavored"></td>
+					<td><input type="number" disabled id="bluffArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Climb</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="climbSkillBonus"></td>
+					<td>STR</td>
+					<td><input type="number" disabled id="climbAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="climbClass1Skill">
+					</td>
+					<td><input type="number" disabled id="climbRanks"></td>
+					<td><input type="number" disabled id="climbRaceSyn"></td>
+					<td><input type="number" disabled id="climbMisc"></td>
+					<td><input type="number" disabled id="climbFavored"></td>
+					<td><input type="number" disabled id="climbArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Concentration</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="concentrationSkillBonus"></td>
+					<td>CON</td>
+					<td><input type="number" disabled id="concentrationAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="concentrationClass1Skill">
+					</td>
+					<td><input type="number" disabled id="concentrationRanks"></td>
+					<td><input type="number" disabled id="concentrationRaceSyn"></td>
+					<td><input type="number" disabled id="concentrationMisc"></td>
+					<td><input type="number" disabled id="concentrationFavored"></td>
+					<td><input type="number" disabled id="concentrationArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Decipher Script</td>
+					<td>No</td>
+					<td><input type="number" disabled id="decipherScriptSkillBonus"></td>
+					<td>INT</td>
+					<td><input type="number" disabled id="decipherScriptAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="decipherScriptClass1Skill">
+					</td>
+					<td><input type="number" disabled id="decipherScriptRanks"></td>
+					<td><input type="number" disabled id="decipherScriptRaceSyn"></td>
+					<td><input type="number" disabled id="decipherScriptMisc"></td>
+					<td><input type="number" disabled id="decipherScriptFavored"></td>
+					<td><input type="number" disabled id="decipherScriptArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Diplomacy</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="diplomacySkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" disabled id="diplomacyAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="diplomacyClass1Skill">
+					</td>
+					<td><input type="number" disabled id="diplomacyRanks"></td>
+					<td><input type="number" disabled id="diplomacyRaceSyn"></td>
+					<td><input type="number" disabled id="diplomacyMisc"></td>
+					<td><input type="number" disabled id="diplomacyFavored"></td>
+					<td><input type="number" disabled id="diplomacyArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Disable Device</td>
+					<td>No</td>
+					<td><input type="number" disabled id="disableDeviceSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="disableDeviceAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="disableDeviceClass1Skill">
+					</td>
+					<td><input type="number" disabled id="disableDeviceRanks"></td>
+					<td><input type="number" disabled id="disableDeviceRaceSyn"></td>
+					<td><input type="number" disabled id="disableDeviceMisc"></td>
+					<td><input type="number" disabled id="disableDeviceFavored"></td>
+					<td><input type="number" disabled id="disableDeviceArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Disguise</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="disguiseSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" disabled id="disguiseAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="disguiseClass1Skill">
+					</td>
+					<td><input type="number" disabled id="disguiseRanks"></td>
+					<td><input type="number" disabled id="disguiseRaceSyn"></td>
+					<td><input type="number" disabled id="disguiseMisc"></td>
+					<td><input type="number" disabled id="disguiseFavored"></td>
+					<td><input type="number" disabled id="disguiseArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Escape Artist</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="escapeArtistSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="escapeArtistAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="escapeArtistClass1Skill">
+					</td>
+					<td><input type="number" disabled id="escapeArtistRanks"></td>
+					<td><input type="number" disabled id="escapeArtistRaceSyn"></td>
+					<td><input type="number" disabled id="escapeArtistMisc"></td>
+					<td><input type="number" disabled id="escapeArtistFavored"></td>
+					<td><input type="number" disabled id="escapeArtistArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Forgery</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="forgerySkillBonus"></td>
+					<td>INT</td>
+					<td><input type="number" disabled id="forgeryAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="forgeryClass1Skill">
+					</td>
+					<td><input type="number" disabled id="forgeryRanks"></td>
+					<td><input type="number" disabled id="forgeryRaceSyn"></td>
+					<td><input type="number" disabled id="forgeryMisc"></td>
+					<td><input type="number" disabled id="forgeryFavored"></td>
+					<td><input type="number" disabled id="forgeryArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Gather Information</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="gatherInformationSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" disabled id="gatherInformationAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="gatherInformationClass1Skill">
+					</td>
+					<td><input type="number" disabled id="gatherInformationRanks"></td>
+					<td><input type="number" disabled id="gatherInformationRaceSyn"></td>
+					<td><input type="number" disabled id="gatherInformationMisc"></td>
+					<td><input type="number" disabled id="gatherInformationFavored"></td>
+					<td><input type="number" disabled id="gatherInformationArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Handle Animal</td>
+					<td>No</td>
+					<td><input type="number" disabled id="handleAnimalSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" disabled id="handleAnimalAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="handleAnimalClass1Skill">
+					</td>
+					<td><input type="number" disabled id="handleAnimalRanks"></td>
+					<td><input type="number" disabled id="handleAnimalRaceSyn"></td>
+					<td><input type="number" disabled id="handleAnimalMisc"></td>
+					<td><input type="number" disabled id="handleAnimalFavored"></td>
+					<td><input type="number" disabled id="handleAnimalArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Heal</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="healSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="healAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="healClass1Skill">
+					</td>
+					<td><input type="number" disabled id="healRanks"></td>
+					<td><input type="number" disabled id="healRaceSyn"></td>
+					<td><input type="number" disabled id="healMisc"></td>
+					<td><input type="number" disabled id="healFavored"></td>
+					<td><input type="number" disabled id="healArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Hide</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="hideSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="hideAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="hideClass1Skill">
+					</td>
+					<td><input type="number" disabled id="hideRanks"></td>
+					<td><input type="number" disabled id="hideRaceSyn"></td>
+					<td><input type="number" disabled id="hideMisc"></td>
+					<td><input type="number" disabled id="hideFavored"></td>
+					<td><input type="number" disabled id="hideArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Intimidate</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="intimidateSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" disabled id="intimidateAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="intimidateClass1Skill">
+					</td>
+					<td><input type="number" disabled id="intimidateRanks"></td>
+					<td><input type="number" disabled id="intimidateRaceSyn"></td>
+					<td><input type="number" disabled id="intimidateMisc"></td>
+					<td><input type="number" disabled id="intimidateFavored"></td>
+					<td><input type="number" disabled id="intimidateArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Jump</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="jumpSkillBonus"></td>
+					<td>STR</td>
+					<td><input type="number" disabled id="jumpAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="jumpClass1Skill">
+					</td>
+					<td><input type="number" disabled id="jumpRanks"></td>
+					<td><input type="number" disabled id="jumpRaceSyn"></td>
+					<td><input type="number" disabled id="jumpMisc"></td>
+					<td><input type="number" disabled id="jumpFavored"></td>
+					<td><input type="number" disabled id="jumpArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Listen</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="listenSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="listenAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="listenClass1Skill">
+					</td>
+					<td><input type="number" disabled id="listenRanks"></td>
+					<td><input type="number" disabled id="listenRaceSyn"></td>
+					<td><input type="number" disabled id="listenMisc"></td>
+					<td><input type="number" disabled id="listenFavored"></td>
+					<td><input type="number" disabled id="listenArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Move Silently</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="moveSilentlySkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="moveSilentlyAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="moveSilentlyClass1Skill">
+					</td>
+					<td><input type="number" disabled id="moveSilentlyRanks"></td>
+					<td><input type="number" disabled id="moveSilentlyRaceSyn"></td>
+					<td><input type="number" disabled id="moveSilentlyMisc"></td>
+					<td><input type="number" disabled id="moveSilentlyFavored"></td>
+					<td><input type="number" disabled id="moveSilentlyArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Open Lock</td>
+					<td>No</td>
+					<td><input type="number" disabled id="openLockSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="openLockAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="openLockClass1Skill">
+					</td>
+					<td><input type="number" disabled id="openLockRanks"></td>
+					<td><input type="number" disabled id="openLockRaceSyn"></td>
+					<td><input type="number" disabled id="openLockMisc"></td>
+					<td><input type="number" disabled id="openLockFavored"></td>
+					<td><input type="number" disabled id="openLockArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Ride</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="rideSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="rideAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="rideClass1Skill">
+					</td>
+					<td><input type="number" disabled id="rideRanks"></td>
+					<td><input type="number" disabled id="rideRaceSyn"></td>
+					<td><input type="number" disabled id="rideMisc"></td>
+					<td><input type="number" disabled id="rideFavored"></td>
+					<td><input type="number" disabled id="rideArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Search</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="searchSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="searchAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="searchClass1Skill">
+					</td>
+					<td><input type="number" disabled id="searchRanks"></td>
+					<td><input type="number" disabled id="searchRaceSyn"></td>
+					<td><input type="number" disabled id="searchMisc"></td>
+					<td><input type="number" disabled id="searchFavored"></td>
+					<td><input type="number" disabled id="searchArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Sense Motive</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="senseMotiveSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="senseMotiveAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="senseMotiveClass1Skill">
+					</td>
+					<td><input type="number" disabled id="senseMotiveRanks"></td>
+					<td><input type="number" disabled id="senseMotiveRaceSyn"></td>
+					<td><input type="number" disabled id="senseMotiveMisc"></td>
+					<td><input type="number" disabled id="senseMotiveFavored"></td>
+					<td><input type="number" disabled id="senseMotiveArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Sleight of Hand</td>
+					<td>No</td>
+					<td><input type="number" disabled id="sleightOfHandSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="sleightOfHandAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="sleightOfHandClass1Skill">
+					</td>
+					<td><input type="number" disabled id="sleightOfHandRanks"></td>
+					<td><input type="number" disabled id="sleightOfHandRaceSyn"></td>
+					<td><input type="number" disabled id="sleightOfHandMisc"></td>
+					<td><input type="number" disabled id="sleightOfHandFavored"></td>
+					<td><input type="number" disabled id="sleightOfHandArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Spellcraft</td>
+					<td>No</td>
+					<td><input type="number" disabled id="spellcraftSkillBonus"></td>
+					<td>INT</td>
+					<td><input type="number" disabled id="spellcraftAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="spellcraftClass1Skill">
+					</td>
+					<td><input type="number" disabled id="spellcraftRanks"></td>
+					<td><input type="number" disabled id="spellcraftRaceSyn"></td>
+					<td><input type="number" disabled id="spellcraftMisc"></td>
+					<td><input type="number" disabled id="spellcraftFavored"></td>
+					<td><input type="number" disabled id="spellcraftArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Spot</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="spotSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="spotAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="spotClass1Skill">
+					</td>
+					<td><input type="number" disabled id="spotRanks"></td>
+					<td><input type="number" disabled id="spotRaceSyn"></td>
+					<td><input type="number" disabled id="spotMisc"></td>
+					<td><input type="number" disabled id="spotFavored"></td>
+					<td><input type="number" disabled id="spotArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Survival</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="survivalSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="survivalAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="survivalClass1Skill">
+					</td>
+					<td><input type="number" disabled id="survivalRanks"></td>
+					<td><input type="number" disabled id="survivalRaceSyn"></td>
+					<td><input type="number" disabled id="survivalMisc"></td>
+					<td><input type="number" disabled id="survivalFavored"></td>
+					<td><input type="number" disabled id="survivalArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Swim</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="swimSkillBonus"></td>
+					<td>STR</td>
+					<td><input type="number" disabled id="swimAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="swimClass1Skill">
+					</td>
+					<td><input type="number" disabled id="swimRanks"></td>
+					<td><input type="number" disabled id="swimRaceSyn"></td>
+					<td><input type="number" disabled id="swimMisc"></td>
+					<td><input type="number" disabled id="swimFavored"></td>
+					<td><input type="number" disabled id="swimArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Tumble</td>
+					<td>No</td>
+					<td><input type="number" disabled id="tumbleSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="tumbleAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="tumbleClass1Skill">
+					</td>
+					<td><input type="number" disabled id="tumbleRanks"></td>
+					<td><input type="number" disabled id="tumbleRaceSyn"></td>
+					<td><input type="number" disabled id="tumbleMisc"></td>
+					<td><input type="number" disabled id="tumbleFavored"></td>
+					<td><input type="number" disabled id="tumbleArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Use Magic Device</td>
+					<td>No</td>
+					<td><input type="number" disabled id="useMagicDeviceSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" disabled id="useMagicDeviceAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="useMagicDeviceClass1Skill">
+					</td>
+					<td><input type="number" disabled id="useMagicDeviceRanks"></td>
+					<td><input type="number" disabled id="useMagicDeviceRaceSyn"></td>
+					<td><input type="number" disabled id="useMagicDeviceMisc"></td>
+					<td><input type="number" disabled id="useMagicDeviceFavored"></td>
+					<td><input type="number" disabled id="useMagicDeviceArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Use Rope</td>
+					<td>Yes</td>
+					<td><input type="number" disabled id="useRopeSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" disabled id="useRopeAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="useRopeClass1Skill">
+					</td>
+					<td><input type="number" disabled id="useRopeRanks"></td>
+					<td><input type="number" disabled id="useRopeRaceSyn"></td>
+					<td><input type="number" disabled id="useRopeMisc"></td>
+					<td><input type="number" disabled id="useRopeFavored"></td>
+					<td><input type="number" disabled id="useRopeArmorCheck"></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td>Knowledge: Arcana</td>
+					<td>No</td>
+					<td><input type="number" disabled id="knowledgeArcanaSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="knowledgeArcanaAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="knowledgeArcanaClass1Skill">
+					</td>
+					<td><input type="number" disabled id="knowledgeArcanaRanks"></td>
+					<td><input type="number" disabled id="knowledgeArcanaRaceSyn"></td>
+					<td><input type="number" disabled id="knowledgeArcanaMisc"></td>
+					<td><input type="number" disabled id="knowledgeArcanaFavored"></td>
+					<td><input type="number" disabled id="knowledgeArcanaArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Knowledge: History</td>
+					<td>No</td>
+					<td><input type="number" disabled id="knowledgeHistorySkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="knowledgeHistoryAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="knowledgeHistoryClass1Skill">
+					</td>
+					<td><input type="number" disabled id="knowledgeHistoryRanks"></td>
+					<td><input type="number" disabled id="knowledgeHistoryRaceSyn"></td>
+					<td><input type="number" disabled id="knowledgeHistoryMisc"></td>
+					<td><input type="number" disabled id="knowledgeHistoryFavored"></td>
+					<td><input type="number" disabled id="knowledgeHistoryArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Knowledge: Local</td>
+					<td>No</td>
+					<td><input type="number" disabled id="knowledgeLocalSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="knowledgeLocalAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="knowledgeLocalClass1Skill">
+					</td>
+					<td><input type="number" disabled id="knowledgeLocalRanks"></td>
+					<td><input type="number" disabled id="knowledgeLocalRaceSyn"></td>
+					<td><input type="number" disabled id="knowledgeLocalMisc"></td>
+					<td><input type="number" disabled id="knowledgeLocalFavored"></td>
+					<td><input type="number" disabled id="knowledgeLocalArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Knowledge: Planes</td>
+					<td>No</td>
+					<td><input type="number" disabled id="knowledgePlanesSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="knowledgePlanesAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="knowledgePlanesClass1Skill">
+					</td>
+					<td><input type="number" disabled id="knowledgePlanesRanks"></td>
+					<td><input type="number" disabled id="knowledgePlanesRaceSyn"></td>
+					<td><input type="number" disabled id="knowledgePlanesMisc"></td>
+					<td><input type="number" disabled id="knowledgePlanesFavored"></td>
+					<td><input type="number" disabled id="knowledgePlanesArmorCheck"></td>
+				</tr>
+				<tr>
+					<td>Knowledge: Religion</td>
+					<td>No</td>
+					<td><input type="number" disabled id="knowledgeReligionSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" disabled id="knowledgeReligionAbilityMod"></td>
+					<td>
+						 <input type="checkbox" id="knowledgeReligionClass1Skill">
+					</td>
+					<td><input type="number" disabled id="knowledgeReligionRanks"></td>
+					<td><input type="number" disabled id="knowledgeReligionRaceSyn"></td>
+					<td><input type="number" disabled id="knowledgeReligionMisc"></td>
+					<td><input type="number" disabled id="knowledgeReligionFavored"></td>
+					<td><input type="number" disabled id="knowledgeReligionArmorCheck"></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset id="languages">
+			<legend>Languages</legend>
+			<select id="languagesKnown" multiple="multiple">
+					<option value="abyssal">Abyssal</option>
+					<option value="aquan">Aquan</option>
+					<option value="auran">Auran</option>
+					<option value="celestial">Celestial</option>
+					<option value="common">Common</option>
+					<option value="draconic">Draconic</option>
+					<option value="druidic">Druidic</option>
+					<option value="dwarven">Dwarven</option>
+					<option value="elven">Elven</option>
+					<option value="giant">Giant</option>
+					<option value="gnome">Gnome</option>
+					<option value="goblin">Goblin</option>
+					<option value="gnoll">Gnoll</option>
+					<option value="halfling">Halfling</option>
+					<option value="ignan">Ignan</option>
+					<option value="infernal">Infernal</option>
+					<option value="orc">Orc</option>
+					<option value="sylvan">Sylvan</option>
+					<option value="terran">Terran</option>
+					<option value="undercommon">Undercommon</option>
+				</select>
+		</fieldset>
+		<fieldset id="attacks">
+			<legend>Attacks</legend>
+			<fieldset id="attack1">
+				<legend>Attack 1</legend>
+				Weapon: <select id="weapon1">
+						<optgroup label="Simple - Unarmed Attacks"></optgroup>
+							<option value="gauntlet">Gauntlet</option>
+							<option value="unarmedStrike">Unarmed Strike</option>
+						<optgroup label="Simple - Light Melee"></optgroup>
+							<option value="dagger">Dagger</option>
+							<option value="daggerPunching">Dagger, punching</option>
+							<option value="gauntletSpiked">Gauntlet, spiked</option>
+							<option value="maceLight">Mace, light</option>
+							<option value="sickle">Sickle</option>
+						<optgroup label="Simple - One-Handed Melee"></optgroup>
+							<option value="club">Club</option>
+							<option value="maceHeavy">Mace, heavy</option>
+							<option value="morngingstar">Morningstar</option>
+							<option value="shortspear">Shortspear</option>
+						<optgroup label="Simple - Two-Handed Melee"></optgroup>
+							<option value="longspear">Longspear</option>
+							<option value="quarterstaff">Quarterstaff</option>
+							<option value="spear">Spear</option>
+						<optgroup label="Simple - Ranged"></optgroup>
+							<option value="crossbowHeavy">Crossbow, heavy</option>
+							<option value="crossbowLight">Crossbow, light</option>
+							<option value="dart">Dart</option>
+							<option value="javelin">Javelin</option>
+							<option value="sling">Sling</option>
+						<optgroup label="Martial - Light Melee"></optgroup>
+							<option value="axeThrowing">Axe, throwing</option>
+							<option value="hammerLight">Hammer, light</option>
+							<option value="handaxe">Handaxe</option>
+							<option value="kukri">Kukri</option>
+							<option value="pickLight">Pick, light</option>
+							<option value="sap">Sap</option>
+							<option value="shieldLight">Shield, light</option>
+							<option value="spikedArmor">Spiked armor</option>
+							<option value="spikedShieldLight">Spiked shield, light</option>
+							<option value="swordShort">Sword, short</option>
+						<optgroup label="Martial - One-Handed Melee"></optgroup>
+							<option value="battleaxe">Battleaxe</option>
+							<option value="flail">Flail</option>
+							<option value="longsword">Longsword</option>
+							<option value="pickHeavy">Pick, heavy</option>
+							<option value="rapier">Rapier</option>
+							<option value="scimitar">Scimitar</option>
+							<option value="shieldHeavy">Shield, heavy</option>
+							<option value="spikedShieldHeavy">Spiked shield, heavy</option>
+							<option vlaue="trident">Trident</option>
+							<option value="warhammer">Warhammer</option>
+						<optgroup label="Martial - Two-Handed Melee"></optgroup>
+							<option value="falchion">Falchion</option>
+							<option value="glaive">Glaive</option>
+							<option value="greataxe">Greataxe</option>
+							<option value="greatclub">Greatclub</option>
+							<option value="flailHeavy">Flail, heavy</option>
+							<option value="greatsword">Greatsword</option>
+							<option value="guisarme">Guisarme</option>
+							<option value="halberd">Halberd</option>
+							<option value="lance">Lance</option>
+							<option value="ranseur">Ranseur</option>
+							<option value="scythe">Scythe</option>
+						<optgroup label="Martial - Ranged"></optgroup>
+							<option value="longbow">Longbow</option>
+							<option value="longbowComposite">Longbow, composite</option>
+							<option value="shortbow">Shortbow</option>
+							<option value="shortbowComposite">Shortbow, composite</option>
+						<optgroup label="Exotic - Light Melee"></optgroup>
+							<option value="kama">Kama</option>
+							<option value="nunchaku">Nunchaku</option>
+							<option value="sai">Sai</option>
+							<option value="siangham">Siangham</option>
+						<optgroup label="Exotic - One-Handed Melee"></optgroup>
+							<option value="swordBastard">Sword, bastard</option>
+							<option value="waraxeDwarven">Waraxe, dwarven</option>
+							<option value="whip">Whip</option>
+						<optgroup label="Exotic - Two-Handed Melee"></optgroup>
+							<option value="axeOrcDouble">Axe, orc double</option>
+							<option value="chainSpiked">Chain, spiked</option>
+							<option value="flailDire">Flail, dire</option>
+							<option value="hammerGnomeHooked">Hammer, gnome hooked</option>
+							<option value="swordTwoBladed">Sword, two-bladed</option>
+							<option value="urgroshDwarven">Urgrosh, dwarven</option>
+						<optgroup label="Exotic - Ranged"></optgroup>
+							<option value="bolas">Bolas</option>
+							<option value="crossbowHand">Crossbow, hand</option>
+							<option value="crossbowRepeatingHeavy">Crossbow, repeating heavy</option>
+							<option value="crossbowRepeatingLight">Crossbow, repeating light</option>
+							<option value="net">Net</option>
+							<option value="shuriken">Shuriken</option>
+					</select><br> Attack Bonus: <input type="number" disabled id="attackBonus1"><br> Damage: <select id="damage1">
+						<option value="1d2">1d2</option>
+						<option value="1d4">1d4</option>
+						<option value="1d6">1d6</option>
+						<option value="1d8">1d8</option>
+						<option value="1d10">1d10</option>
+						<option value="1d12">1d12</option>
+						<option value="2d4">2d4</option>
+						<option value="2d6">2d6</option>
+						<option value="2d8">2d8</option>
+						<option value="2d10">2d10</option>
+						<option value="2d12">2d12</option>
+					</select><br> Critical Range: <select id="critRange1">
+						<option value="18-20">18-20</option>
+						<option value="19-20">19-20</option>
+						<option value="20">20</option>
+					</select><br> Critical Modifier: <select id="critMod1">
+						<option value="x2">x2</option>
+						<option value="x3">x3</option>
+						<option value="x4">x4</option>
+					</select><br> Range: <input type="number" disabled id="range"> ft.<br> Type: <select id="type">
+						<option value="bludgeoning">Bludgeoning</option>
+						<option value="piercing">Piercing</option>
+						<option value="slashing">Slashing</option>
+					</select><br> Weight: <input type="number" disabled id="weight"> lbs.<br> Ammo: <input type="number" disabled id="ammo"><br>
+			</fieldset>
+		</fieldset>
+		<fieldset id="initiative">
+			<legend>Initiative</legend>
+			Initiative Modifier: <input type="number" disabled id="initiativeMod"><br> DEX Bonus: <input type="number" disabled id="initiativeDexMod"><br> Feats Bonus: <input type="number" disabled id="initiativeFeatsMod"><br> Misc. Bonus: <input type="number" disabled id="initiativeMiscMod"><br>
+		</fieldset>
+		<fieldset id="speed">
+			<legend>Speed</legend>
+			Base Speed: <input type="number" disabled id="baseSpeed"><br> Speed with Armor: <input type="number" disabled id="armorSpeed"><br> Temporary Speed: <input type="number" disabled id="tempSpeed"><br> Swim Speed: <input type="number" disabled id="swimSpeed"><br> Fly Speed: <input type="number" disabled
+				id="flySpeed"><br> Climb Speed: <input type="number" disabled id="climbSpeed"><br>
+		</fieldset>
+		<fieldset id="baseAttack">
+			<legend>Base Attack</legend>
+			Base Attack Bonus: <input type="number" disabled id="baseAttackBonus"><br> Melee Attack Bonus: <input type="number" disabled id="meleeAttackBonus"><br> Ranged Attack Bonus: <input type="number" disabled id="rangedAttackBonus"><br>
+		</fieldset>
+		<fieldset id="grapple">
+			<legend>Grapple</legend>
+			Grapple Bonus: <input type="number" disabled id="grappleBonus"><br> Base Attack Bonus: <input type="number" disabled id="grappleBaseAttackBonus"><br> Size Modifier: <input type="number" disabled id="grappleSizeMod"><br> STR Modifier: <input type="number" disabled id="grappleStrMod"><br>			Misc. Modifier: <input type="number" disabled id="grappleMiscMod"><br>
+		</fieldset>
+		<fieldset id="health">
+			<legend>Health</legend>
+			Base Hit Points: <input type="number" disabled id="hpBase"> hp<br> Current Hit Points: <input type="number" disabled id="hp"> hp<br> Current Non-Lethal Hit Points: <input type="number" disabled id="hpNonLethal"> hp<br>
+		</fieldset>
+		<fieldset id="armorClass">
+			<legend>Armor Class</legend>
+			Armor Class: <input type="number" disabled id="ac"><br> 10 + <br> DEX <input type="number" disabled id="acDexMod"><br> Armor AC <input type="number" disabled id="acArmorMod"><br> Shield AC <input type="number" disabled id="acShieldMod"><br> Natural Armor <input type="number" disabled id="acNaturalArmor"><br>			Size Modifier <input type="number" disabled id="acSizeMod"><br> Deflection Modifier <input type="number" disabled id="acDeflectionMod"><br> Misc. <input type="number" disabled id="acMiscMod"><br> Flat-Footed Armor Class: <input type="number" disabled id="acFlat"><br> 10 + <br> Armor
+			AC <input type="number" disabled id="acFlatArmorMod"><br> Shield AC <input type="number" disabled id="acFlatShieldMod"><br> Natural Armor <input type="number" disabled id="acFlatNaturalArmor"><br> Size Modifier <input type="number" disabled id="acFlatSizeMod"><br> Deflection Modifier
+			<input type="number" disabled id="acFlatDeflectionMod"><br> Misc. <input type="number" disabled id="acFlatMiscMod"><br> Touch Armor Class: <input type="number" disabled id="acTouch"><br> 10 + <br> DEX <input type="number" disabled id="acTouchDexMod"><br> Size Modifier <input type="number" disabled
+				id="acTouchSizeMod"><br> Deflection Modifier <input type="number" disabled id="acTouchDeflectionMod"><br> Misc. <input type="number" disabled id="acTouchMiscMod"><br>
+		</fieldset>
+		<fieldset id="armor">
+			<legend>Armor</legend>
+			Armor: <select id="armorName">
+					<optgroup label="Light Armor"></optgroup>
+						<option value="padded">Padded</option>
+						<option value="leather">Leather</option>
+						<option value="studdedLeather">Studded Leather</option>
+						<option value="chainShirt">Chain Shirt</option>
+					<optgroup label="Medium Armor"></optgroup>
+						<option value="hideArmor">Hide</option>
+						<option value="scaleMail">Scale mail</option>
+						<option value="chainMail">Chainmail</option>
+						<option value="breastplate">Breastplate</option>
+					<optgroup label="Heavy Armor"></optgroup>
+						<option value="splintMail">Splint mail</option>
+						<option value="bandedMail">Banded mail</option>
+						<option value="halfPlate">Half-plate</option>
+						<option value="fullPlate">Full plate</option>
+				</select><br> Type: <select id="armorType">
+					<option value="lightArmor">Light</option>
+					<option value="mediumArmor">Medium</option>
+					<option value="heavyArmor">Heavy</option>
+				</select><br> Max Speed: <input type="number" disabled id="armorMaxSpeed"> ft.<br> Max AC DEX: <input type="number" disabled id="armorMaxDex"><br> Check Penalty: <input type="number" disabled id="armorCheckPenalty"><br> Weight: <input type="number" disabled id="armorWeight"><br> Spell
+			Failure: <input type="number" disabled id="armorCheckPenalty" min="0" max="100">%<br> Armor AC Bonus: <input type="number" disabled id="armorAcBonus"><br>
+		</fieldset>
+		<fieldset id="shield">
+			<legend>Shield</legend>
+			Shield:
+			<select id="shieldName">
+					<option value="buckler">Buckler</option>
+					<option value="shieldLightWooden">Light wooden</option>
+					<option value="shieldLightSteel">Light steel</option>
+					<option value="shieldHeavyWooden">Heavy wooden</option>
+					<option value="shieldHeavySteel">Heavy steel</option>
+					<option value="shieldTower">Tower</option>
+				</select><br>
+		</fieldset>
+		<fieldset id="money">
+			<legend>Money</legend>
+			Copper: <input type="number" disabled id="cpHeld">cp<br> Silver: <input type="number" disabled id="spHeld">sp<br> Gold: <input type="number" disabled id="gpHeld">gp<br> Platinum: <input type="number" disabled id="ppHeld">pp<br>
+		</fieldset </form>
+		<input type="button" id="getIdTags" onclick="getIds()" value="Log all IDs on this page to the console."><br>
+</body>
+
+</html>

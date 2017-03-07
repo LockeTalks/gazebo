@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Skill Buyer</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+	  <script language="javascript" type="text/javascript" src="skill-functions.js"></script>
+  </head>
+  <body onload="zeroSkills()">
+		<input type="number" id="rankStart" readonly="true">
+		<fieldset id="skillsFieldset">
+			<legend>Skills</legend>
+			<table>
+				<tr>
+				<td>Points to Spend on Skills</td>
+				<td><input type="number" id="skillBank" value="16" readonly="true"></td>
+				<td>Max Ranks for Class Skills</td>
+				<td><input type="number" id="maxRanksClass" value="4" readonly="true"></td>
+				<td>Max Ranks for Cross-Class Skills</td>
+				<td><input type="number" id="maxRanksCrossClass" value="2" readonly="true"></td>
+				</tr>
+			</table>
+			<br>
+			<table id="skillsTable">
+				<tr>
+					<th>Skill Name</th>
+					<th>Can Be Used Untrained</th>
+					<th>Skill Bonus</th>
+					<th>Key Ability</th>
+					<th>Key Ability Modifier</th>
+					<th>Class Skill</th>
+					<th>Ranks</th>
+					<th>Race, Feats, Synergy</th>
+					<th>Misc.</th>
+					<th>Favored Enemy Bonus</th>
+					<th>Armor Check Penalty</th>
+				</tr>
+				<tr>
+					<form id="appraise">
+						<td>Appraise</td>
+						<td>Yes</td>
+						<td><input type="number" class="numberIn" readonly="true" id="appraiseSkillBonus"></td>
+						<td>INT</td>
+						<td><input type="number" class="numberIn" readonly="true" id="appraiseAbilityMod"></td>
+						<td><input type="checkbox" class="checkboxIn" disabled id="appraiseClass1Skill"></td>
+						<td><input type="number" class="numberIn" id="appraiseRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+						<td><input type="number" class="numberIn" readonly="true" id="appraiseRaceSyn"></td>
+						<td><input type="number" class="numberIn" readonly="true" id="appraiseMisc"></td>
+						<td> - </td>
+						<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="balance">
+						<td>Balance</td>
+						<td>Yes</td>
+						<td><input type="number" class="numberIn" readonly="true" id="balanceSkillBonus"></td>
+						<td>DEX</td>
+						<td><input type="number" class="numberIn" readonly="true" id="balanceAbilityMod"></td>
+						<td><input type="checkbox" class="checkboxIn" disabled id="balanceClass1Skill"></td>
+						<td><input type="number" class="numberIn" id="balanceRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+						<td><input type="number" class="numberIn" readonly="true" id="balanceRaceSyn"></td>
+						<td><input type="number" class="numberIn" readonly="true" id="balanceMisc"></td>
+						<td> - </td>
+						<td><input type="number" class="numberIn" readonly="true" id="balanceArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="bluff">
+					<td>Bluff</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="bluffSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" class="numberIn" readonly="true" id="bluffAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="bluffClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="bluffRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="bluffRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="bluffMisc"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="bluffFavored"></td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="climb">
+					<td>Climb</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="climbSkillBonus"></td>
+					<td>STR</td>
+					<td><input type="number" class="numberIn" readonly="true" id="climbAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="climbClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="climbRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="climbRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="climbMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="climbArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="concentration">
+					<td>Concentration</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="concentrationSkillBonus"></td>
+					<td>CON</td>
+					<td><input type="number" class="numberIn" readonly="true" id="concentrationAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="concentrationClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="concentrationRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="concentrationRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="concentrationMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="decipherScript">
+					<td>Decipher Script</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="decipherScriptSkillBonus"></td>
+					<td>INT</td>
+					<td><input type="number" class="numberIn" readonly="true" id="decipherScriptAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="decipherScriptClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="decipherScriptRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="decipherScriptRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="decipherScriptMisc"></td>
+					<td> - </td>
+					<td> - </td>
+				</form>
+				</tr>
+				<tr>
+					<td>Diplomacy</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="diplomacySkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" class="numberIn" readonly="true" id="diplomacyAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="diplomacyClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="diplomacyRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="diplomacyRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="diplomacyMisc"></td>
+					<td> - </td>
+					<td> - </td>
+				</tr>
+				<tr>
+					<form id="disableDevice">
+					<td>Disable Device</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="disableDeviceSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="disableDeviceAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="disableDeviceClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="disableDeviceRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="disableDeviceRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="disableDeviceMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="disguise">
+					<td>Disguise</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="disguiseSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" class="numberIn" readonly="true" id="disguiseAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="disguiseClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="disguiseRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="disguiseRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="disguiseMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="escapeArtist">
+					<td>Escape Artist</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="escapeArtistSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="escapeArtistAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="escapeArtistClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="escapeArtistRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="escapeArtistRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="escapeArtistMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="escapeArtistArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="forgery">
+					<td>Forgery</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="forgerySkillBonus"></td>
+					<td>INT</td>
+					<td><input type="number" class="numberIn" readonly="true" id="forgeryAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="forgeryClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="forgeryRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="forgeryRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="forgeryMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="gatherInformation">
+					<td>Gather Information</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="gatherInformationSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" class="numberIn" readonly="true" id="gatherInformationAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="gatherInformationClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="gatherInformationRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="gatherInformationRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="gatherInformationMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="handleAnimal">
+					<td>Handle Animal</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="handleAnimalSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" class="numberIn" readonly="true" id="handleAnimalAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="handleAnimalClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="handleAnimalRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="handleAnimalRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="handleAnimalMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="heal">
+					<td>Heal</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="healSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="healAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="healClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="healRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="healRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="healMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="hide">
+					<td>Hide</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="hideSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="hideAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="hideClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="hideRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="hideRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="hideMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="hideArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="intimidate">
+					<td>Intimidate</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="intimidateSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" class="numberIn" readonly="true" id="intimidateAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="intimidateClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="intimidateRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="intimidateRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="intimidateMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="jump">
+					<td>Jump</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="jumpSkillBonus"></td>
+					<td>STR</td>
+					<td><input type="number" class="numberIn" readonly="true" id="jumpAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="jumpClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="jumpRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="jumpRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="jumpMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="jumpArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="listen">
+					<td>Listen</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="listenSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="listenAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="listenClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="listenRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="listenRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="listenMisc"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="listenFavored"></td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="moveSilently">
+					<td>Move Silently</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="moveSilentlySkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="moveSilentlyAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="moveSilentlyClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="moveSilentlyRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="moveSilentlyRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="moveSilentlyMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="moveSilentlyArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="openLock">
+					<td>Open Lock</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="openLockSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="openLockAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="openLockClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="openLockRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="openLockRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="openLockMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="ride">
+					<td>Ride</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="rideSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="rideAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="rideClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="rideRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="rideRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="rideMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="search">
+					<td>Search</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="searchSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="searchAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="searchClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="searchRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="searchRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="searchMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="senseMotive">
+					<td>Sense Motive</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="senseMotiveSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="senseMotiveAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="senseMotiveClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="senseMotiveRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="senseMotiveRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="senseMotiveMisc"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="senseMotiveFavored"></td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="sleightOfHand">
+					<td>Sleight of Hand</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="sleightOfHandSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="sleightOfHandAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="sleightOfHandClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="sleightOfHandRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="sleightOfHandRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="sleightOfHandMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="sleightOfHandArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="spellcraft">
+					<td>Spellcraft</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="spellcraftSkillBonus"></td>
+					<td>INT</td>
+					<td><input type="number" class="numberIn" readonly="true" id="spellcraftAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="spellcraftClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="spellcraftRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="spellcraftRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="spellcraftMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="spot">
+					<td>Spot</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="spotSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="spotAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="spotClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="spotRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="spotRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="spotMisc"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="spotFavored"></td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="survival">
+					<td>Survival</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="survivalSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="survivalAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="survivalClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="survivalRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="survivalRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="survivalMisc"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="survivalFavored"></td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="swim">
+					<td>Swim</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="swimSkillBonus"></td>
+					<td>STR</td>
+					<td><input type="number" class="numberIn" readonly="true" id="swimAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="swimClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="swimRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="swimRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="swimMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="swimArmorCheck"> x2 </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="tumble">
+					<td>Tumble</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="tumbleSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="tumbleAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="tumbleClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="tumbleRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="tumbleRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="tumbleMisc"></td>
+					<td> - </td>
+					<td><input type="number" class="numberIn" readonly="true" id="tumbleArmorCheck"></td>
+					</form>
+				</tr>
+				<tr>
+					<form id="useMagicDevice">
+					<td>Use Magic Device</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="useMagicDeviceSkillBonus"></td>
+					<td>CHA</td>
+					<td><input type="number" class="numberIn" readonly="true" id="useMagicDeviceAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="useMagicDeviceClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="useMagicDeviceRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="useMagicDeviceRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="useMagicDeviceMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="useRope">
+					<td>Use Rope</td>
+					<td>Yes</td>
+					<td><input type="number" class="numberIn" readonly="true" id="useRopeSkillBonus"></td>
+					<td>DEX</td>
+					<td><input type="number" class="numberIn" readonly="true" id="useRopeAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="useRopeClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="useRopeRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="useRopeRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="useRopeMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+					<td> - </td>
+				</tr>
+				<tr>
+					<form id="knowledgeArcana">
+					<td>Knowledge: Arcana</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeArcanaSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeArcanaAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="knowledgeArcanaClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="knowledgeArcanaRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeArcanaRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeArcanaMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="knowledgeHistory">
+					<td>Knowledge: History</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeHistorySkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeHistoryAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="knowledgeHistoryClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="knowledgeHistoryRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeHistoryRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeHistoryMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="knowledgeLocal">
+					<td>Knowledge: Local</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeLocalSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeLocalAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="knowledgeLocalClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="knowledgeLocalRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeLocalRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeLocalMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="knowledgePlanes">
+					<td>Knowledge: Planes</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgePlanesSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgePlanesAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="knowledgePlanesClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="knowledgePlanesRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgePlanesRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgePlanesMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+				<tr>
+					<form id="knowledgeReligion">
+					<td>Knowledge: Religion</td>
+					<td>No</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeReligionSkillBonus"></td>
+					<td>WIS</td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeReligionAbilityMod"></td>
+					<td><input type="checkbox" class="checkboxIn" disabled id="knowledgeReligionClass1Skill"></td>
+					<td><input type="number" class="numberIn" id="knowledgeReligionRanks" onmousedown="getRanks(this)" onmouseup="setRanks(this);updateSkills()"  min="0" max="4"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeReligionRaceSyn"></td>
+					<td><input type="number" class="numberIn" readonly="true" id="knowledgeReligionMisc"></td>
+					<td> - </td>
+					<td> - </td>
+					</form>
+				</tr>
+			</table>
+		</fieldset>
+		</body>
+</html>

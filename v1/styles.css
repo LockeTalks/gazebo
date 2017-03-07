@@ -1,0 +1,104 @@
+fieldset {
+  margin: 0px 10px 2px 0px;
+}
+
+input[type="number"] {
+  width:47px;
+}
+
+input[type="button"]  {
+  width:57px;
+}
+
+#startAbs {
+	float:left;
+}
+
+#continueAbs {
+  float:left;
+}
+
+#finishAbs {
+	float:left;
+	font-weight:bold;
+}
+
+#raceFieldset {
+	float:left;
+	clear:left;
+	height:42px;
+}
+
+#favoredClassFieldset {
+	float:left;
+	height:42px;
+}
+
+#favoredClass {
+	width:112px;
+}
+
+#classFieldset {
+  float:left;
+	height:42px;
+}
+
+#levelFieldset {
+	float:left;
+	height:42px;
+}
+
+#lvl {
+	width:42px;
+}
+
+#lvlUp {
+	width:80px;
+}
+
+#baseAttackFieldset {
+	float:left;
+	height:42px;
+}
+
+#baseAttack {
+	width:112px;
+}
+
+#physicalTraits {
+	float:left;
+	clear:left;
+}
+
+td.label {
+	width: 125px;
+	text-align:right;
+}
+
+#saveFieldset {
+  float:left;
+  clear:left;
+}
+
+#skillsFieldset {
+	clear:left;
+}
+
+#skillsTable td {
+	border-bottom:1px dotted lightgray;
+	text-align:center;
+}
+
+#skillsTable th {
+	border-bottom:1px solid darkgray;
+	width:50px;
+}
+
+#rankStart {
+	display:none;
+}
+
+#featsFieldset {
+	float:left;
+	clear:left;
+}

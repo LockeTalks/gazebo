@@ -1,0 +1,71 @@
+fieldset {
+  margin: 0px 10px 2px 0px;
+}
+
+input[type="number"] {
+  width:47px;
+}
+
+input[type="button"]  {
+  width:57px;
+}
+
+#startAbs {
+	float:left;
+}
+
+#continueAbs {
+  float:left;
+}
+
+#finishAbs {
+	float:left;
+	font-weight:bold;
+}
+
+#raceFieldset {
+	float:left;
+	clear:left;
+}
+
+#classFieldset {
+  float:left;
+}
+
+#baseAttackFieldset {
+	float:left;
+}
+
+#physicalTraits {
+	float:left;
+	clear:left;
+}
+
+td.label {
+	width: 125px;
+	text-align:right;
+}
+
+#baseAttack {
+	width:100%;
+	text-align:center;
+}
+
+#saveFieldset {
+  float:left;
+  clear:left;
+}
+
+#skillsTable td {
+	border-bottom:1px dotted lightgray;
+	text-align:center;
+}
+
+#skillsTable th {
+	border-bottom:1px solid darkgray;
+	width:50px;
+}
+
+#rankStart {
+	display:none;
+}
